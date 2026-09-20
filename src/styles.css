@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .13);
+  background: rgba(255, 255, 255, .07);
+  padding: 0 14px;
+  color: white;
+  outline: none;
+}
+
+select option {
+  color: #111827;
+}
+
+input:focus,
+select:focus {
+  border-color: rgba(252, 211, 77, .9);
+  box-shadow: 0 0 0 3px rgba(252, 211, 77, .18);
+}
+
+@layer components {
+  .focus-ring {
+    @apply rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-amber-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950;
+  }
+
+  .primary-btn {
+    @apply inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-300 px-6 py-3 text-sm font-black text-slate-950 shadow-glow transition hover:bg-amber-200 focus-ring disabled:cursor-not-allowed;
+  }
+
+  .secondary-btn {
+    @apply inline-flex min-h-12 items-center gap-2 rounded-lg border border-white/[.12] bg-white/[.08] px-5 py-3 text-sm font-bold text-white/[.82] transition hover:bg-white/[.12] focus-ring;
+  }
+
+  .icon-btn {
+    @apply grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/[.08] text-white transition hover:bg-white/[.14] focus-ring;
+  }
+
+  .section {
+    @apply mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8;
+  }
+
+  .premium-card {
+    @apply rounded-xl border border-white/10 bg-white/[.055] p-5 shadow-panel backdrop-blur-xl transition hover:-translate-y-1 hover:border-amber-200/35;
+  }
+
+  .modal-panel {
+    @apply relative max-h-[92vh] w-full overflow-y-auto rounded-2xl border border-white/[.12] bg-[#11111f] p-6 shadow-panel sm:p-8;
+  }
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 42%, rgba(250, 204, 21, .19), transparent 28%),
+    radial-gradient(circle at 18% 22%, rgba(34, 211, 238, .16), transparent 24%),
+    linear-gradient(135deg, #070711 0%, #151323 48%, #07131c 100%);
+}
+
+.game-shell {
+  position: relative;
+  width: min(92vw, 540px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 2px solid rgba(250, 204, 21, .3);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, .08) 0 25%, rgba(250, 204, 21, .15) 26% 45%, transparent 46%),
+    conic-gradient(from -22deg, rgba(250, 204, 21, .25), rgba(34, 211, 238, .15), rgba(251, 113, 133, .2), rgba(134, 239, 172, .15), rgba(250, 204, 21, .25));
+  box-shadow: 0 35px 120px rgba(0, 0, 0, .55), inset 0 0 100px rgba(250, 204, 21, .15), 0 0 40px rgba(250, 204, 21, .15);
+}
+
+@keyframes spinBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.game-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, rgba(250, 204, 21, 0.4), transparent);
+  animation: spinBg 8s linear infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+
+
+.bottle {
+  position: relative;
+  width: clamp(220px, 60vw, 360px);
+  height: clamp(80px, 22vw, 130px);
+  transform-origin: 50% 50%;
+  transition: transform 4.3s cubic-bezier(.12, .74, .09, 1);
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .6));
+}
+
+.bottle-body {
+  position: absolute;
+  left: 15%;
+  top: 50%;
+  height: 76%;
+  width: 70%;
+  transform: translateY(-50%);
+  border-radius: 44px 18px 18px 44px;
+  border: 2px solid rgba(255, 255, 255, .62);
+  background: linear-gradient(90deg, rgba(34, 211, 238, .92), rgba(8, 145, 178, .9) 48%, rgba(6, 78, 59, .88));
+  overflow: hidden;
+}
+
+.bottle-neck {
+  position: absolute;
+  left: -5%;
+  top: 50%;
+  height: 38%;
+  width: 28%;
+  transform: translateY(-50%);
+  border-radius: 999px 0 0 999px;
+  border: 2px solid rgba(255, 255, 255, .62);
+  background: linear-gradient(90deg, rgba(232, 244, 247, .95), rgba(103, 232, 249, .9));
+}
+
+.bottle-shine {
+  position: absolute;
+  left: 20%;
+  top: 16%;
+  width: 60%;
+  height: 13%;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .55);
+}
+
+.bottle-label {
+  position: absolute;
+  left: 65%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .9);
+  color: #0f172a;
+  padding: 6px 16px;
+  font-size: clamp(.75rem, 2vw, 1rem);
+  font-weight: 1000;
+}
+
+.bottle-active {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .game-shell {
+    width: min(96vw, 420px);
+  }
+}
