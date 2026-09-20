@@ -448,10 +448,17 @@ function ClaimSuccess({ prize, whatsappUrl, onClose }) {
 }
 
 function Modal({ children, onClose, labelledBy, wide = false }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
-      <div className={`modal-panel ${wide ? 'max-w-3xl' : 'max-w-lg'}`}>
-        <button className="icon-btn absolute right-4 top-4" onClick={onClose} aria-label="Close modal">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
+      <div className={`modal-panel w-full ${wide ? 'max-w-3xl' : 'max-w-lg'}`}>
+        <button className="icon-btn absolute right-4 top-4 z-10" onClick={onClose} aria-label="Close modal">
           <X size={20} />
         </button>
         {children}
